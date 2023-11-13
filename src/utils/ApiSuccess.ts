@@ -1,13 +1,13 @@
 class ApiResponse {
-  public statusCode: number;
-  public data: any; // Adjust the type based on your actual data type
-  public message: string;
-  public success: boolean;
+    public statusCode: number;
+    public data: any; // Adjust the type based on your actual data type
+    public message: string;
+    public success: boolean;
 
-  constructor(statusCode: number, data: any, message = "Success") {
-    this.statusCode = statusCode;
-    this.data = data;
-    this.message = message;
-    this.success = statusCode < 400;
-  }
+    constructor(statusCode: number, data: any, message = "Success") {
+        this.statusCode = statusCode;
+        this.data = data;
+        this.message = message;
+        this.success = statusCode < 400;
+    }
 }

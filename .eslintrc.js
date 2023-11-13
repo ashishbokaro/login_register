@@ -55,6 +55,7 @@ module.exports = {
       "natural": false
   }],
   'camelcase': ['error', { 'properties': 'always' }],
+  'space-infix-ops': ['error', { int32Hint: false }],
     "no-multiple-empty-lines": [
       "error",
       {
