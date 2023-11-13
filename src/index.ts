@@ -1,9 +1,8 @@
 import appInstance from "./app";
 import Server from "./server";
-import dotenv from "dotenv";
-dotenv.config();
+import {basicConfigurationObject} from "./utils/constants";
 const serverInstance = new Server(appInstance.app);
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const PORT = (basicConfigurationObject.PORT_NUMBER) ? parseInt(basicConfigurationObject.PORT_NUMBER) : 3000;
 
 serverInstance.start(PORT);

@@ -3,8 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 import User from "../interfaces/user.interface";
 import ShortUniqueId from "short-unique-id";
 import CryptoJS  from "crypto-js";
-import dotenv from "dotenv";
-dotenv.config();
+import {CommonErrorMessage, basicConfigurationObject} from "../utils/constants";
 const uid = new ShortUniqueId();
 
 interface UserDocument extends User, Document {}
@@ -21,12 +20,12 @@ const userSchema = new Schema<UserDocument>({
     email: {
         index:true,
         lowercase: true,
-        required: [true, "Email is Required"],
+        required: [true, CommonErrorMessage.EMAIL_REQUIRED],
         trim: true,
         type: String,
         unique: true,
         validate: {
-            message: "Invalid email address",
+            message: CommonErrorMessage.INVALID_EMAIL,
             validator: (value: string) => {
                 // Email validation regex
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,7 +55,7 @@ const userSchema = new Schema<UserDocument>({
         type:Number
     },
     password:{
-        required:[true, "Password is required"],
+        required:[true, CommonErrorMessage.PASSWORD_REQUIRED],
         type:String
     },
     refreshToken:{
@@ -70,12 +69,12 @@ const userSchema = new Schema<UserDocument>({
     userName:{
         index:true,
         lowercase:true,
-        required:[true, "User name is Required"],
+        required:[true, CommonErrorMessage.USERNAME_REQUIRED],
         trim:true,
         type:String,
         unique:true,
         validate:{
-            message:"User name must be alphanumeric.",
+            message:CommonErrorMessage.USERNAME_VALIDATION_ERROR,
             validator:(value:string)=>{
                 const userNameRegex = /^[a-zA-Z0-9]+$/;
 
@@ -94,7 +93,7 @@ const userSchema = new Schema<UserDocument>({
 });
 
 async function passworEncryption(password:string, salt:string):Promise<string>{
-    const loginKey = process.env.LOGIN_SECRET_KEY;
+    const loginKey = basicConfigurationObject.PASSWORD_SECRET_KEY;
 
     if(!loginKey) return "Login key is missing";
     const passwordHashed = CryptoJS.HmacSHA256(password + salt, loginKey).toString();
