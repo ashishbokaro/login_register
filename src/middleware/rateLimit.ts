@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import {CommonErrorMessage, statusCodeObject} from "../utils/constants";
 
 class RateLimiter {
     private rateLimitMap: Map<string, { count: number; lastAccess: number }> = new Map();
@@ -22,7 +23,7 @@ class RateLimiter {
 
         if (!clientIP) {
             // Handle the case where clientIP is undefined (e.g., if req.ip is not available)
-            res.status(400).send("Bad Request");
+            res.status(statusCodeObject.HTTP_STATUS_BAD_REQUEST).send(CommonErrorMessage.ERROR_MESSAGE_BAD_REQUEST);
 
             return; 
         }
@@ -35,7 +36,7 @@ class RateLimiter {
             entry.lastAccess = Date.now();
   
             if (this.isRateLimitExceeded(entry)) {
-                res.status(429).send("Too many requests from this IP, please try again later.");
+                res.status(statusCodeObject.HTTP_STATUS_TOO_MANY_REQUESTS).send(CommonErrorMessage.ERROR_MESSAGE_TOO_MANY_REQUESTS);
 
                 return;
             }
