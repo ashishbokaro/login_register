@@ -95,7 +95,7 @@ const userSchema = new Schema<UserDocument>({
 async function passworEncryption(password:string, salt:string):Promise<string>{
     const loginKey = basicConfigurationObject.PASSWORD_SECRET_KEY;
 
-    if(!loginKey) return "Login key is missing";
+    if(!loginKey) return CommonErrorMessage.LOGIN_KEY_MISSING;
     const passwordHashed = CryptoJS.HmacSHA256(password + salt, loginKey).toString();
 
     return passwordHashed;

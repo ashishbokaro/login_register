@@ -7,5 +7,5 @@ export default interface BasicConfiguration {
     REFRESH_TOKEN_EXPIRY?: string;
     PASSWORD_SECRET_KEY?: string;
     PORT_NUMBER?: string
-  };
+  }
   

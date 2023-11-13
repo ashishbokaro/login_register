@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
 import BasicConfiguration  from "../interfaces/basicConfiguration.interface";
 import StatusCode  from "../interfaces/statusCode.interface";
+import dotenv from "dotenv";
 dotenv.config();
 
 export const basicConfigurationObject :BasicConfiguration = {
@@ -9,7 +9,7 @@ export const basicConfigurationObject :BasicConfiguration = {
     CORS_ORIGIN : process.env.CORS_ORIGIN,
     MONGODB_URI : process.env.MONGODB_URI,
     PASSWORD_SECRET_KEY : process.env.PASSWORD_SECRET_KEY,
-    PORT_NUMBER:process.env.PORT,
+    PORT_NUMBER: process.env.PORT,
     REFRESH_TOKEN_EXPIRY : process.env.REFRESH_TOKEN_EXPIRY,
     REFRESH_TOKEN_SECRET : process.env.REFRESH_TOKEN_SECRET
 };
@@ -34,6 +34,7 @@ export const CommonErrorMessage = {
     ERROR_MESSAGE_TOO_MANY_REQUESTS : "Too Many Requests",
     ERROR_MESSAGE_UNAUTHORIZED : "Unauthorized",
     INVALID_EMAIL:"Invalid Email",
+    LOGIN_KEY_MISSING:"Login Key is Missing",
     MESSAGE_ERROR : "Error",
     MESSAGE_SUCCESS : "Success",
     PASSWORD_REQUIRED:"Password is Required",
