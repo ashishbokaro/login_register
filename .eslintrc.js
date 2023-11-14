@@ -7,10 +7,11 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2018,
+    sourceType: 'module',
   },
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint","sort-keys-fix"],
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended","plugin:@typescript-eslint/recommended"],
   rules: {
     indent: [
       "error",
@@ -21,7 +22,7 @@ module.exports = {
     ],
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
-    semi: ["error", "always"],
+    // semi: ["error", "always"],
     "comma-spacing": [
       "error",
       {
@@ -55,6 +56,17 @@ module.exports = {
       "natural": false
   }],
   'camelcase': ['error', { 'properties': 'always' }],
+  '@typescript-eslint/member-delimiter-style': [
+    'error',
+    {
+      multiline: {
+        delimiter: 'semi', // No semicolons between members
+      },
+      singleline: {
+        delimiter: 'semi', // Use semicolons in single-line interfaces
+      },
+    },
+  ],
   'space-infix-ops': ['error', { int32Hint: false }],
     "no-multiple-empty-lines": [
       "error",

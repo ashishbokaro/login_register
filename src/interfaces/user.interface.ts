@@ -15,4 +15,4 @@ export default interface User {
   loggedInStatus: boolean;
   created?: Date;
   updated?: Date;
-};
+}
