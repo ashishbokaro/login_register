@@ -68,6 +68,7 @@ module.exports = {
     },
   ],
   'space-infix-ops': ['error', { int32Hint: false }],
+  "@typescript-eslint/no-explicit-any": "error",
     "no-multiple-empty-lines": [
       "error",
       {

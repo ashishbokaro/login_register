@@ -1,23 +1,26 @@
-export default class ApiError extends Error {
-    public statusCode: number;
-    public data: any;
-    public success: boolean;
-    public errors: any[];
+export default class ApiError<T> extends Error {
+    public readonly statusCode: number;
+    public readonly data: T | null;
+    public readonly success: boolean;
+    public readonly errors: T[];
 
     constructor(
         statusCode: number,
-        message = "Something went wrong",
-        errors: any[] = [],
+        message: string = "Something went wrong",
+        errors: T[] = [],
+        data: T | null = null,
         stack?: string
     ) {
         super(message);
         this.statusCode = statusCode;
-        this.data = null;
-        this.message = message;
+        this.data = data;
         this.success = false;
         this.errors = errors;
 
-        if (stack) this.stack = stack;
-        else Error.captureStackTrace(this, this.constructor);
+        if (stack) {
+            this.stack = stack;
+        } else {
+            Error.captureStackTrace(this, this.constructor);
+        }
     }
 }

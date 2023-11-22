@@ -27,6 +27,7 @@ export const statusCodeObject:StatusCode = {
 
 export const CommonErrorMessage = {
     EMAIL_REQUIRED:"Email is Required",
+    ERROR_FIELD_REQUIRED: "Field required",
     ERROR_MESSAGE_BAD_REQUEST : "Bad Request",
     ERROR_MESSAGE_FORBIDDEN : "Forbidden",
     ERROR_MESSAGE_INTERNAL_SERVER_ERROR : "Internal Server Error",
@@ -41,3 +42,10 @@ export const CommonErrorMessage = {
     USERNAME_REQUIRED:"User name is required",
     USERNAME_VALIDATION_ERROR:"User name must be alphanumeric."
 };
+
+export const registerErrorMessage = {
+    ERROR_INVALID_EMAIL_VALIDATION:"Invalid email address",
+    ERROR_PASSWORD_VALIDATION:"At least 1 uppercase, 1 lowercase, 1 number, 1 special character and minimum 8 characters required.",
+    ERROR_USER_ALREADY_EXIST:"User Already Exist",
+    ERROR_USER_NOT_FOUND:"User Not Found"
+}

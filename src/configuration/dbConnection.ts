@@ -1,23 +1,28 @@
 import mongoose, { ConnectOptions } from "mongoose";
-interface CustomConnectOptions extends ConnectOptions {
-    useNewUrlParser?: boolean;
-    useUnifiedTopology?: boolean;
-  }
+import {basicConfigurationObject} from "../utils/constants"
+// interface CustomConnectOptions extends ConnectOptions {
+//     useNewUrlParser?: boolean;
+//     useUnifiedTopology?: boolean;
+//   }
 class Database {
     private readonly uri: string;
 
-    constructor(uri: string) {
+    constructor(uri: string = basicConfigurationObject.MONGODB_URI || "") {
         this.uri = uri;
+        if(!this.uri){
+            console.error("MONGODB_URI is missing");
+            process.exit(1);
+        }
     }
 
     async connect(): Promise<void> {
         try {
-            const options: CustomConnectOptions = {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            };
+            // const options: CustomConnectOptions = {
+            //     useNewUrlParser: true,
+            //     useUnifiedTopology: true,
+            // };
 
-            await mongoose.connect(this.uri, options);
+            await mongoose.connect(this.uri);
             console.log("Connected to MongoDB");
         } catch (error) {
             console.error("MongoDB connection error:", error);
@@ -31,12 +36,4 @@ class Database {
     }
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-    console.error("MONGODB_URI is missing");
-    process.exit(1);
-}
-const db = new Database(MONGODB_URI);
-
-export default db
+export default Database;

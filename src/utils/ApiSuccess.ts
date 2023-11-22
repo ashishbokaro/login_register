@@ -1,13 +1,15 @@
-class ApiResponse {
+class ApiResponse<T> {
     public statusCode: number;
-    public data: any; // Adjust the type based on your actual data type
+    public data: T;
     public message: string;
     public success: boolean;
 
-    constructor(statusCode: number, data: any, message = "Success") {
+    constructor(statusCode: number, data: T, message = "Success") {
         this.statusCode = statusCode;
         this.data = data;
         this.message = message;
         this.success = statusCode < 400;
     }
 }
+
+export default ApiResponse

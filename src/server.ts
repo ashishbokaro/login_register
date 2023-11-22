@@ -6,7 +6,7 @@ export default class server {
         this.app = app;
         process
             .on("SIGINT", () => this.onSignalInterruptedHandler())
-            .on("unhandledRejection", (reason, p) => this.onUnhandledRejection(reason, p))
+            .on("unhandledRejection", (reason, p) => this.onUnhandledRejection(reason as Error, p))
             .on("uncaughtException", (err) => this.onUncaughtException(err));
     }
     public start(port: number): void {
@@ -20,7 +20,7 @@ export default class server {
         process.exit(0);
     }
 
-    private onUnhandledRejection(reason: any, p: Promise<any>): void {
+    private onUnhandledRejection(reason: Error, p: Promise<any>): void {
         console.error("Unhandled Rejection at Promise", p, "\nReason:", reason);
         // Optionally, log the error or take other actions
     }
