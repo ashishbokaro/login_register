@@ -1,6 +1,7 @@
 services:
-  - type: web
-    plan: free
+  - name: my-node-app
+    runtime: nodejs
+    plan: starter
     buildCommand: npm run build && npm install
     startCommand: npm start
     autoDeploy: false
