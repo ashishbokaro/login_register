@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import asyncHandler from "../../utils/asyncHandler";
-import userService  from "../../services/user.register.service";
-import User from "../../interfaces/user.interface"
-import fieldValidator from "../../utils/fieldValidator";
-import ApiError from "../../utils/ApiError";
 import { CommonErrorMessage, registerErrorMessage, statusCodeObject, errorAndSuccessCodeConfiguration } from "../../utils/constants";
+import userService  from "../../services/user.register.service";
+import fieldValidator from "../../utils/fieldValidator";
+import asyncHandler from "../../utils/asyncHandler";
+import User from "../../interfaces/user.interface"
 import ApiResponse from "../../utils/ApiSuccess";
+import { Request, Response } from "express";
+import ApiError from "../../utils/ApiError";
 
 class UserController {
 
