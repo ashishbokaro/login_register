@@ -1,8 +1,20 @@
 import BasicConfiguration  from "../interfaces/basicConfiguration.interface";
 import StatusCode  from "../interfaces/statusCode.interface";
+import errorAndSuccessCodeConfiguration from "../interfaces/errorAndSuccessCode.interface";
 import dotenv from "dotenv";
 dotenv.config();
 
+export const errorAndSuccessCodeConfiguration:errorAndSuccessCodeConfiguration = {
+    HTTP_STATUS_BAD_REQUEST : 1001,
+    HTTP_STATUS_CONFLICT:1002,
+    HTTP_STATUS_CREATED : 1003,
+    HTTP_STATUS_FORBIDDEN : 1004,
+    HTTP_STATUS_INTERNAL_SERVER_ERROR : 1005,
+    HTTP_STATUS_NOT_FOUND : 1006,
+    HTTP_STATUS_OK : 1007,
+    HTTP_STATUS_TOO_MANY_REQUESTS : 1008,
+    HTTP_STATUS_UNAUTHORIZED : 1008
+};
 export const basicConfigurationObject :BasicConfiguration = {
     ACCESS_TOKEN_EXPIRY : process.env.ACCESS_TOKEN_EXPIRY,
     ACCESS_TOKEN_SECRET : process.env.ACCESS_TOKEN_SECRET,
@@ -49,5 +61,6 @@ export const registerErrorMessage = {
     ERROR_INVALID_EMAIL_VALIDATION:"Invalid email address",
     ERROR_PASSWORD_VALIDATION:"At least 1 uppercase, 1 lowercase, 1 number, 1 special character and minimum 8 characters required.",
     ERROR_USER_ALREADY_EXIST:"User Already Exist",
-    ERROR_USER_NOT_FOUND:"User Not Found"
+    ERROR_USER_NOT_FOUND:"User Not Found",
+    SUCCESSFULLY_SAVED:"User Registered Successfully"
 }

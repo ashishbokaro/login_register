@@ -59,20 +59,19 @@ const userSchema = new Schema<UserDocument>({
         type:String
     },
     refreshToken:{
-        required:true,
+        required:false,
         type:String,
     },
     salt:{
-        required:true,
+        required:false,
         type:String
     },
     userName:{
-        index:true,
         lowercase:true,
         required:[false, CommonErrorMessage.USERNAME_REQUIRED],
         trim:true,
         type:String,
-        unique:true,
+        // unique:true,
         validate:{
             message:CommonErrorMessage.USERNAME_VALIDATION_ERROR,
             validator:(value:string)=>{
@@ -96,7 +95,7 @@ async function passworEncryption(password:string, salt:string):Promise<string>{
     const loginKey = basicConfigurationObject.PASSWORD_SECRET_KEY;
 
     if(!loginKey) return CommonErrorMessage.LOGIN_KEY_MISSING;
-    const passwordHashed = CryptoJS.HmacSHA256(password + salt, loginKey).toString();
+    const passwordHashed = await CryptoJS.HmacSHA256(password + salt, loginKey).toString();
 
     return passwordHashed;
 }
