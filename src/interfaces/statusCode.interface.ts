@@ -7,5 +7,6 @@ export default interface BasicConfiguration {
     HTTP_STATUS_OK : number;
     HTTP_STATUS_UNAUTHORIZED : number;
     HTTP_STATUS_TOO_MANY_REQUESTS : number;
+    HTTP_STATUS_CONFLICT:number;
   }
   

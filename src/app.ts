@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -6,7 +6,6 @@ import userRouter from "./routes/users/user.route";
 import logger from "./utils/logger";
 import Database from "./configuration/dbConnection";
 import {CommonErrorMessage} from "./utils/constants"
-// import * as bodyParser from "body-parser"
 class App {
     public app: Express;
 
@@ -53,17 +52,17 @@ class App {
         }
     }
 
-    private errorHandlerMiddleware(err: Error, req: Request, res: Response): void {
+    private errorHandlerMiddleware(err: Error, req: Request, res: Response, next: NextFunction): void {
         logger.error("Error caught by error handling middleware:", err);
         res.status(500).send({ error: CommonErrorMessage.ERROR_MESSAGE_INTERNAL_SERVER_ERROR });
     }
 
     private setRoutes(): void {
         this.app.use("/api/v1/users", userRouter);
-
         this.app.get("*", (req: Request, res: Response) => {
             res.status(404).send({ error: CommonErrorMessage.ERROR_MESSAGE_NOT_FOUND });
         });
+
     }
 }
 

@@ -14,7 +14,7 @@ const userSchema = new Schema<UserDocument>({
         type:Boolean
     },
     coverImage:{
-        required:true,
+        required:false,
         type:String
     },
     email: {
@@ -35,23 +35,23 @@ const userSchema = new Schema<UserDocument>({
         },
     },
     emailVerified:{
-        required:true,
+        required:false,
         type:Boolean
     },
     emailVerifiedTime:{
-        required:true,
+        required:false,
         type:Date
     },
     firstName:{
-        required:true,
+        required:false,
         type:String
     },
     lastName:{
-        required:true,
+        required:false,
         type:String
     },
     loginCount:{
-        required:true,
+        required:false,
         type:Number
     },
     password:{
@@ -69,7 +69,7 @@ const userSchema = new Schema<UserDocument>({
     userName:{
         index:true,
         lowercase:true,
-        required:[true, CommonErrorMessage.USERNAME_REQUIRED],
+        required:[false, CommonErrorMessage.USERNAME_REQUIRED],
         trim:true,
         type:String,
         unique:true,
@@ -104,14 +104,11 @@ async function passworEncryption(password:string, salt:string):Promise<string>{
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")) return next();
     
-    const salt = uid.stamp(32);
+    this.salt = uid.stamp(32);
 
-    this.salt = salt;
-    this.password = await passworEncryption(this.password, salt);
+    this.password = await passworEncryption(this.password, this.salt);
     
 });
-
-// userSchema.methods.encryptPassword = 
 
 const UserModel =  mongoose.model<User>("user", userSchema);
 
