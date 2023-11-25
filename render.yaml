@@ -1,6 +1,7 @@
 services:
   - type: web
     name: my-node-app
+    runtime: Node
     plan: starter
     buildCommand: npm run build && npm install
     startCommand: npm start
