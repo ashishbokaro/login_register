@@ -1,4 +1,6 @@
 services:
   - type: web
-    buildCommand: npm install && npm run build
+    plan: free
+    buildCommand: npm run build && npm install
     startCommand: npm start
+    autoDeploy: false
